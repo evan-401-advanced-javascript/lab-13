@@ -6,7 +6,7 @@
 
  ### Links and Resources
 * [submission PR](https://github.com/evan-401-advanced-javascript/lab-13/pull/1)
-* [travis](https://travis-ci.com/lilliangales-401-advanced-javascript/lab11-auth-server)
+* [travis](https://www.travis-ci.com/evan-401-advanced-javascript/lab-13/builds/125003436)
 * [front-end](https://lab11-auth-server.herokuapp.com/) 
 * [docs](http://localhost:3000/docs/)
 
