@@ -7,7 +7,9 @@
     "start": "node index.js",
     "watch": "nodemon index.js",
     "test-watch": "jest --watchAll",
-    "test": "jest"
+    "test": "jest",
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json",
+    "lint": "eslint **/*.js"
   },
   "jest": {
     "testEnvironment": "node"
@@ -30,5 +32,14 @@
     "require-directory": "^2.1.1",
     "supertest": "^3.3.0",
     "swagger-ui-express": "^4.0.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evan-401-advanced-javascript/lab-13.git"
+  },
+  "bugs": {
+    "url": "https://github.com/evan-401-advanced-javascript/lab-13/issues"
+  },
+  "homepage": "https://github.com/evan-401-advanced-javascript/lab-13#readme"
 }
