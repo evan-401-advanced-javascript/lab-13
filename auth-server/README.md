@@ -2,7 +2,7 @@
 
  ## API Server
 
- ### Author: Lillian Gales & Evan Brecht-Curry
+ ### Author: Evan Brecht-Curry
 
  ### Links and Resources
 * [submission PR](https://github.com/lilliangales-401-advanced-javascript/lab11-auth-server/pull/1)

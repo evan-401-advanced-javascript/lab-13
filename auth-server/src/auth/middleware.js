@@ -3,7 +3,9 @@
 const User = require('./users-model.js');
 
 module.exports = (req, res, next) => {
-  
+
+
+
   try {
     let [authType, authString] = req.headers.authorization.split(/\s+/);
     
@@ -33,10 +35,14 @@ module.exports = (req, res, next) => {
   }
 
   function _authBearer(authString) {
+
     return User.authenticateToken(authString)
       .then(user => _authenticate(user))
       .catch(next);
   }
+
+  //Create middleware that takes the generated token and stores it into a db
+  //if that token is used again pass null
 
   function _authenticate(user) {
     if(user) {

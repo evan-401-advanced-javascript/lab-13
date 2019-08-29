@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+let tokens = {};
+
 const users = new mongoose.Schema({
   username: {type:String, required:true, unique:true},
   password: {type:String, required:true},
@@ -40,16 +42,19 @@ users.statics.createFromOauth = function(email) {
 };
 
 users.statics.authenticateToken = function(token) {
-  // Vinicio - JWT will decrypt tokens if you call the verify function
   const decrpytedToken = jwt.verify(token, process.env.SECRET || 'secret');
-  // Vinicio , now I'm expecting something that looks like this
-  // {
-  //   id: this._id,
-  //   role: this.role,
-  // };
-  //Vinicio - now that I have this, I'm going to find a user based on the id
   const query = {_id: decrpytedToken.id};
-  return this.findOne(query);
+
+  let tokenExists = tokens.hasOwnProperty(token);
+
+  if (tokenExists === true) {
+    console.log('invalid token console');
+    return Promise.reject('invalid token promise');
+
+  } else if (tokenExists === false && process.env.SINGLEUSE === true) {
+      tokens[token] = token;
+      return this.findOne(query);
+  }
 };
 
 users.statics.authenticateBasic = function(auth) {
@@ -70,8 +75,14 @@ users.methods.generateToken = function() {
     id: this._id,
     role: this.role,
   };
-  
-  return jwt.sign(token, process.env.SECRET);
+// add 2 options
+  if(process.env.EXPIRATION) {
+    console.log('using expiration');
+    return jwt.sign(token, process.env.SECRET, {expiresIn: 3});
+  } else {
+    console.log('not using expiration');
+    return jwt.sign(token, process.env.SECRET);
+  }
 };
 
 module.exports = mongoose.model('users', users);
